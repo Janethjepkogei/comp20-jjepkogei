@@ -11,7 +11,7 @@ function parse(){
 	 				elem = document.getElementById("messages");
 
 	 				for(var i =0; i < message.length; i++ ){
-	 					elem.innerHTML +="<p>" + message[i].content + " "+message[i].username + "</p>"
+	 					elem.innerHTML +="<p>" + message[i].content + " " + "<i>"+ message[i].username + "</i>" + "</p>"
 	 				}
 	 	}
 
