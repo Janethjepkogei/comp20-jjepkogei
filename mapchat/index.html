@@ -5,42 +5,7 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<link rel="stylesheet" href="stylesheet.css"/>
-		<script>
-
-			var myLat =0;
-			var myLng = 0;
-			var request =  new XMLHttpRequest;
-
-			function init()
-			{
-				var landmark = new google.maps.LatLng(myLat,myLng);
-
-				var myOptions = {
-					zoom: 13,
-					center: landmark,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-
-				var map = new google.maps.Map(document.getElementById("myMap"), myOptions);
-
-				
-				var marker = new google.maps.Marker({
-					position: landmark,
-					title: "Faneuil Hall, Boston, MA"
-				});
-
-				marker.setMap(map);
-
-				var infowindow = new google.maps.InfoWindow();
-
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(marker.title);
-					infowindow.open(map, marker);
-				});
-
-			}
-			
-		</script>
+		<script src="googleMaps.js"></script>
 
 	</head>
 	<body onload="init()">
