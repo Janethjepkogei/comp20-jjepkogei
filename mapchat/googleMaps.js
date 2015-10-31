@@ -27,7 +27,7 @@ function getLocation(){
 			renderMap();
 		});
 	}
-parse();
+//parse();
 }
 
 function renderMap(){
