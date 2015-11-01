@@ -8,6 +8,7 @@ var login;
 var infowindow = new google.maps.InfoWindow();
 var mycurrentLat;
 var mycurrentLng;
+var distanceDiff;
 var myOptions = {
 		zoom: 13,
 		center: landmark,
@@ -27,14 +28,14 @@ function getLocation()
 	
 	if(navigator.geolocation)
 	{
-		console.log(message[0]);
 		for(var i =0; i < message.length; i++)
 		 {
 			myLat = message[i].lat;
 			myLng = message[i].lng;
 			login = message[i].login;
 			note = message[i].message;
-			distanceDiff = distanceFromMe(myLat,myLng);
+			//call toRad();
+			distanceDiff = distanceFromMe();
 			renderMap();
 		}
 	}
@@ -58,7 +59,7 @@ function renderMap(){
 			position: landmark,
 			title: login,
 			message: note,
-			
+			distance: distanceDiff
 		});
 
 	marker.setMap(map);
@@ -69,17 +70,31 @@ function renderMap(){
 
 		}
 		else{
-			infowindow.setContent(marker.title + "<br/> message: " + marker.message + "<br/> Distance from me: " );
+			infowindow.setContent(marker.title + "<br/> message: " + marker.message + "<br/> Distance from me: " + marker.distance);
 		}
 		infowindow.open(map, marker);
 	});
 
 }
+function toRad(x) {
+   return x * Math.PI / 180;
+}
 
-function distanceFromMe(var myLat, var myLng)
+
+function distanceFromMe()
 {
-	
 
+	var R = 6371; // km 
+
+	var dLat = toRad(mycurrentLat - myLat); 
+	
+	var dLon = toRad(mycurrentLng - myLng);  
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                Math.cos(toRad(mycurrentLat)) * Math.cos(toRad(myLat)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);  
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c; 
+	return d;
 }
 
 
@@ -91,12 +106,10 @@ var request =  new XMLHttpRequest;
 	request.onreadystatechange = function ()
 	{
 
-		console.log(request.readyState);
-		if(request.readyState == 4 && request.status == 200)
+				if(request.readyState == 4 && request.status == 200)
 		{
 			data = request.responseText;
 			message = JSON.parse(data);
-			//console.log(message[0]);
 			getLocation();
 
 		}
@@ -104,8 +117,6 @@ var request =  new XMLHttpRequest;
 	};
 
 	var params = "login=RobertHeller&lat=" + mycurrentLat + "&lng="+ mycurrentLng + "&message=" +"Hello%20world";
-	// set headers
-	//params = "<Your location in the right format>"
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.send(params);
 }
