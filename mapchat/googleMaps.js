@@ -34,7 +34,6 @@ function getLocation()
 			myLng = message[i].lng;
 			login = message[i].login;
 			note = message[i].message;
-			//call toRad();
 			distanceDiff = distanceFromMe();
 			renderMap();
 		}
