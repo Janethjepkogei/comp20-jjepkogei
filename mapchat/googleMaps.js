@@ -60,7 +60,8 @@ function renderMap(){
 			position: landmark,
 			title: login,
 			message: note,
-			distance: distanceDiff
+			distance: distanceDiff,
+			icon: 'heritage_site_map_pin.png'
 		});
 
 	marker.setMap(map);
