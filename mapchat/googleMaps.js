@@ -5,9 +5,10 @@ var landmark = new google.maps.LatLng(myLat,myLng);
 var map;
 var marker;
 var login;
-var infowindow;
+var infowindow = null;
 var mycurrentLat;
 var mycurrentLng;
+var markers =[];
 var distanceDiff;
 var myOptions = {
 		zoom: 13,
@@ -30,7 +31,6 @@ function getLocation()
 	{
 		for(var i =0; i < message.length; i++)
 		 {
-		 	infowindow = new google.maps.InfoWindow();
 			myLat = message[i].lat;
 			myLng = message[i].lng;
 			login = message[i].login;
@@ -52,6 +52,7 @@ function getLocation()
 	}
 
 function renderMap(){
+
 	landmark = new google.maps.LatLng(myLat, myLng);
 
 	map.panTo(landmark);
@@ -64,18 +65,24 @@ function renderMap(){
 
 	marker.setMap(map);
 
-		google.maps.event.addListener(marker, 'click', function() {
-		if(myLat == mycurrentLat && myLng == mycurrentLng){
-			infowindow.setContent(marker.title + "<br/> message: " + marker.message);
 
+	infowindow = new google.maps.InfoWindow;
+		
+	google.maps.event.addListener(marker, 'click', function () {
+
+		if(myLat == mycurrentLat && myLng == mycurrentLng){
+			infowindow.setContent(this.title + "<br/> message: " + this.message);
 		}
 		else{
-			infowindow.setContent(marker.title + "<br/> message: " + marker.message + "<br/> Distance from me: " + marker.distance);
+			infowindow.setContent(this.title + "<br/> message: " + this.message + "<br/> Distance from me: " + this.distance);
 		}
-		infowindow.open(map, marker);
-	});
 
+	infowindow.open(map, this);
+	});
 }
+
+
+
 function toRad(x) {
    return x * Math.PI / 180;
 }
