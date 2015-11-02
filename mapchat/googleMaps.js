@@ -5,7 +5,7 @@ var landmark = new google.maps.LatLng(myLat,myLng);
 var map;
 var marker;
 var login;
-var infowindow = new google.maps.InfoWindow();
+var infowindow;
 var mycurrentLat;
 var mycurrentLng;
 var distanceDiff;
@@ -30,6 +30,7 @@ function getLocation()
 	{
 		for(var i =0; i < message.length; i++)
 		 {
+		 	infowindow = new google.maps.InfoWindow();
 			myLat = message[i].lat;
 			myLng = message[i].lng;
 			login = message[i].login;
@@ -99,7 +100,7 @@ function distanceFromMe()
 
 function parse(){
 
-var request =  new XMLHttpRequest;
+	var request =  new XMLHttpRequest;
 
 	request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true);
 	request.onreadystatechange = function ()
