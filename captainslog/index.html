@@ -3,11 +3,42 @@
 <html>
 
 <head>
-	<title>Captain's Log</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script>
-	  // Your work will be done here...
-	</script>
+<title>Captains's Log</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#msg").keypress(function(event) {
+			if (event.which == 13) {
+				var input = document.getElementById('msg').value;
+				var date = new Date();
+
+				localStorage.setItem(date, input);
+
+				reload(date);
+			}
+		}
+		if(localStorage){
+			for(key in localStorage){
+				msg ="";
+				msg = "<p>" + msg +  key +  " - " + localStorage[key] + "</p>";
+				$("#log").prepend( msg);
+			}
+		}
+		);
+
+		
+   		
+ 	});
+
+ 	function reload(key) {
+		output = "";
+		output = "<p>" + output +  key +  " - " + localStorage[key] + "</p>";
+		$("#log").prepend( output);
+	}
+	
+ 
+	
+</script>
 </head>
 
 <body>
