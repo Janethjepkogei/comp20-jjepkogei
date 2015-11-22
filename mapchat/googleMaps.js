@@ -110,7 +110,10 @@ function parse(){
 
 	var request =  new XMLHttpRequest;
 
-	request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true);
+		//request.open('POST', 'http://localhost:3000/sendLocation', true);
+
+		request.open('POST', 'https://dry-beach-7297.herokuapp.com/sendLocation', true);
+		
 	request.onreadystatechange = function ()
 	{
 
