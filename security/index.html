@@ -1,0 +1,94 @@
+<!Doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		
+		<link rel="stylesheet" href="stylesheet.css"/>
+
+	</head>
+	<body>
+		<h1>Security Assessment for secure-hamlet-4685</h1>
+		<h4>Prepared by: Janeth Jepkogei. 12/8/2015 </h4>
+
+		<h2>Introduction</h2>
+		<p>
+			The goal of this assignment is to perform a security assessment on secure-hamlet-4685, a web application developed by John Carsey for Comp20 assignment 3. The web application takes and maintains location check-ins, i.e login, latitude, longitude, and a message, and provides an API that allows people to submit and retrieve the latest json data it received, or a list of all input data in the database. The application is however vulnarable to attacks and this document identifies the vulnerabilities then gives possible solutions to them. 
+
+		</p>
+
+		<h2>Methodology</h2>
+		<p>
+			Initial testing was done using the "black box" method which represents what a real hacker would do. I ran the code on heroku web app and used Postman to send data to the server. I then looked at my partner's code just to find out if there were any other possible vulnerabilities that could be exploited. 
+		</p>
+		<h2>Abstract of findings</h2>
+		<p>
+			The implementer of this application put so much trust in the user input
+
+		</p>
+		<h2>Issues Found</h2>
+		<p>
+
+			<h3> Cross-site scripting while injecting data: </h3>
+			<h4>Documentation:</h4>
+			<div id="documentation">This issue was found in the database as the database accepts all forms of data; app.post; POST API</div>
+			<h4>Severity:</h4>
+			<div id="security"> High. This is a huge problem and the most commonly used by hackers because it is easily neglected </div>
+
+			<h4>Description of the issue:</h4>
+			<div id="Description"> Used Postman to post data into the database, the result was a success with status 200 meaning that the malicious data was successfully added to the database.</div>
+
+			<h4>Proof of vulnarability: </h4>
+				<img src="ScreenShot2.png" alt="Database Screenshot" style="height:600px;">
+			 
+			<h4>Resolution/ Recommendation:</h4>
+			<div id="resolution"> This problem can be fixed by validating the data received as input by HTML escaping. Never ever trust the user's input!</div>
+
+		</p>
+		<p>
+			<h3> Cross-site scripting while accessing data from the database </h3>
+			<h4>Documentation:</h4>
+			<div id="documentation">This issue was found in the app.get("/ ") page; GET API </div>
+			<h4>Severity:</h4>
+			<div id="security"> High. This is a huge problem beacuse you do not want the users of your website to be receiving malicious data unrelated to what they are trying to access</div>
+
+			<h4>Description of the issue:</h4>
+			<div id="Description"> Used Postman to post data into the database,then made a get request to the home page ("/") using Chrome.</div>
+
+			<h4>Proof of vulnarability: </h4>
+				<img src="ScreenShot1.png" alt="Database Screenshot" style="height:500px;">
+			 
+			<h4>Resolution/ Recommendation:</h4>
+			<div id="resolution"> This problem can be fixed by sanitizing the data, swap the "&gt;" symbol to "&gt;" and the "&lt;" tags to "&lt". This ensure the data served is HTML encoded</div>
+			
+		</p>
+
+		<p>
+			<h3> Input copying without checking the type of input </h3>
+
+			<h4>Documentation:</h4>
+			<div id="documentation">This issue was found in while injecting data; POST API</div>
+			<h4>Severity:</h4>
+			<div id="security"> High. This is a huge problem beacuse a hacker easily serve data that could cause your application to behave strangely for example showing a picture of a person instead of a login name. In other cases, this could crush the server. </div>
+
+			<h4>Description of the issue:</h4>
+			<div id="Description"> Used Postman to send data to the database and send strings in the latitude and longitude fields.</div>
+
+			<h4>Proof of vulnarability: </h4>
+				<img src="Screen_Shot3.png" alt="Database Screenshot" style="width:600px,height:500px;">
+			 
+			<h4>Resolution/ Recommendation:</h4>
+			<div id="resolution"> This problem can be fixed by checking to ensure the input is of the right type</div>
+
+		</p>
+
+
+		<h2>Conclusion</h2>
+		<p>
+			Some of the future considerations to put in mind include not ever ever trusting the user's input. Always check or encode the input data before processing or storing it. Also take more precation before serving any requests to the server. Ensure that the data is clean and HTML encoded so as to prevent your client from. 
+
+		</p>
+
+		
+	</body>
+</html>
