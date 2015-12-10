@@ -13,7 +13,7 @@
 
 		<h2>Introduction</h2>
 		<p>
-			The goal of this assignment is to perform a security assessment on secure-hamlet-4685, a web application developed by John Carsey for Comp20 assignment 3. The web application takes and maintains location check-ins, i.e login, latitude, longitude, and a message, and provides an API that allows people to submit and retrieve the latest json data it received, or a list of all input data in the database. The application is however vulnarable to attacks and this document identifies the vulnerabilities then gives possible solutions to them. 
+			The goal of this assignment is to perform a security assessment on secure-hamlet-4685, a web application developed by John Casey for Comp20 assignment 3. The web application takes and maintains location check-ins, i.e login, latitude, longitude, and a message, and provides an API that allows people to submit and retrieve the latest json data it received, or a list of all input data in the database. The application is however vulnarable to attacks and this document identifies the vulnerabilities then gives possible solutions to them. 
 
 		</p>
 
@@ -23,8 +23,7 @@
 		</p>
 		<h2>Abstract of findings</h2>
 		<p>
-			The implementer of this application put so much trust in the user input
-
+			In this web application most vulnerabilities were as a result of putting too much trust on the user'S input. The implementer did not put into consideration that any external user could send any sort of data into the database for storage. The implementer did not also consider that the bad input that was injected could be send to the user of his server. This is a result of trusting external input too. The implementer should have checked to ensure that it is only the expected data that is being received and served by his application.
 		</p>
 		<h2>Issues Found</h2>
 		<p>
@@ -85,7 +84,7 @@
 
 		<h2>Conclusion</h2>
 		<p>
-			Some of the future considerations to put in mind include not ever ever trusting the user's input. Always check or encode the input data before processing or storing it. Also take more precation before serving any requests to the server. Ensure that the data is clean and HTML encoded so as to prevent your client from. 
+			Some of the future considerations to put in mind include not ever ever trusting the user's input. Always check the input data before processing or storing it to make it is the desired input. Also take more precation before serving any requests to the server. Ensure that the data is clean and HTML encoded so as to prevent your client from receiveing malicious data from your server. These preventive measures are not expensive, they are pretty simple to implement and for sure it will save you millions of dollars. 
 
 		</p>
 
